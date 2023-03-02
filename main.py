@@ -31,7 +31,7 @@ def _max_width_():
         unsafe_allow_html=True,
     )
 
-st.set_page_config(page_icon="images/icon.png", page_title="Ask Question to PDF")
+st.set_page_config(page_icon="images/icon.png", page_title="Ask Question to PDF or Link")
 
 
 c2, c3 = st.columns([6, 1])
@@ -40,7 +40,7 @@ with c2:
     c31, c32 = st.columns([12, 2])
     with c31:
         st.caption("")
-        st.title("Ask Question to PDF")
+        st.title("Ask Question to PDF or Link")
     with c32:
         st.image(
             "images/logo.png",
