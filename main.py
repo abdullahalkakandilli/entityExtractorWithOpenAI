@@ -70,7 +70,7 @@ def entity_extractor():
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": "Find the names from the Given article: " +"'" +  pdf_text_result_ + "'"}
+             "content": "What are the names? Answer the question truthfully based on the given text below. Include verbatim quote and a comment where to find it in the text (page number). After the quote write a step by step explanation. Use bullet points.  " +"'" +  pdf_text_result_ + "'"}
 
         ]
     )
