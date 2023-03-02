@@ -70,16 +70,14 @@ def entity_extractor():
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": "Find entities from the given article. Create a dataframe with two column which are the names are "
-                        "Entity name and Entity value and put the values accordingly."
-                        "I want to you check names, locations(it might be a place like a school name, or hospital name), ids, dates, companies, emails, phone numbers, and IBANs. Only chek these values."
+             "content": "Find entities from the given article. Create a dataframe with two column which are the names are 'Entity name' and 'Entity value' and put the values accordingly."
+                        "I want to you check names, locations(it might be a place like a school name, or hospital name), ids, dates, companies, emails, phone numbers, and IBANs. Only chek these values. Don't check other values."
                         "Don't check other entities. There might be more than one name, location etc. Find all of them. Giving article: " +"'" +  pdf_text_result_ + "'"}
 
         ]
     )
 
     content_value = result['choices'][0]['message']['content']
-    st.write(content_value)
     return(content_value)
 
 form = st.form(key="annotation")
