@@ -15,6 +15,8 @@ import requests
 from bs4 import BeautifulSoup
 openai.api_key = os.getenv('OPEN_API_KEY')
 
+result_ = ""
+pdf_text_result_ = ""
 def _max_width_():
     max_width_str = f"max-width: 1800px;"
     st.markdown(
@@ -51,7 +53,7 @@ uploaded_file = st.file_uploader(
     help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
 
 )
-result_ = ""
+
 if uploaded_file is not None:
     output_string = io.StringIO()
 
@@ -96,7 +98,10 @@ with form:
     submitted = st.form_submit_button(label="Submit Question")
 
 if submitted:
-    text = scraper(link_)
+    if link_ != "":
+        text = scraper(link_)
+    else:
+        text = ""
     result_b = entity_extractor(question,pdf_text_result_, text)
     st.write(result_b)
 
