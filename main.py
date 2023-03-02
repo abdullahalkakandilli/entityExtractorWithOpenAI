@@ -99,8 +99,9 @@ if submitted:
     if link_ != "":
         text = scraper(link_)
         st.write(text)
-        entity_extractor(question, text)
+        result_a = entity_extractor(question, text)
+        st.write(result_a)
     else:
-        result = entity_extractor(question,pdf_text_result_)
-        st.write(result)
+        result_b = entity_extractor(question,pdf_text_result_)
+        st.write(result_b)
 
