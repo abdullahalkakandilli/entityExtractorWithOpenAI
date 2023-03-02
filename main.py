@@ -64,7 +64,7 @@ if uploaded_file is not None:
 
     # st.write(merged_text)
     pdf_text_result_ = output_string.getvalue()
-content_value = pd.DataFrame()
+
 def entity_extractor():
     result = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -80,7 +80,7 @@ def entity_extractor():
 
     content_value = result['choices'][0]['message']['content']
 
-    return
+    return(content_value)
 
 form = st.form(key="annotation")
 result = ""
@@ -91,13 +91,13 @@ with form:
 result_df = pd.DataFrame()
 if submitted:
 
-    entity_extractor()
+    result = entity_extractor()
 
 buffer = io.BytesIO()
 # Create a Pandas Excel writer using XlsxWriter as the engine.
 with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
     # Write each dataframe to a different worksheet.
-    content_value.to_excel(writer, sheet_name='Sheet1')
+    result.to_excel(writer, sheet_name='Sheet1')
     # Close the Pandas Excel writer and output the Excel file to the buffer
     writer.save()
     st.download_button(
