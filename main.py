@@ -68,7 +68,7 @@ if uploaded_file is not None:
     # st.write(merged_text)
     pdf_text_result_ = output_string.getvalue()
 
-link_ = st.text_input("Or enter the link of the website")
+link_ = st.text_input("Or enter the link of the website", help("You can put link and pdf at the same."))
 
 def entity_extractor(question, pdftext, linktext):
     result = openai.ChatCompletion.create(
