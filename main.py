@@ -11,7 +11,8 @@ from pdfminer.pdfparser import PDFParser
 import openai
 from dotenv import load_dotenv
 load_dotenv()
-
+import requests
+from bs4 import BeautifulSoup
 openai.api_key = os.getenv('OPEN_API_KEY')
 
 def _max_width_():
@@ -65,25 +66,40 @@ if uploaded_file is not None:
     # st.write(merged_text)
     pdf_text_result_ = output_string.getvalue()
 
-def entity_extractor(question):
+link_ = st.text("Or enter the link of the website")
+
+def entity_extractor(question, context_):
     result = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": " Answer the question truthfully based on the given text below. Include verbatim quote and a comment where to find it in the text (paragraph). After the quote write a step by step explanation. Use bullet points. Question:" + question + "Given text: " +"'" +  pdf_text_result_ + "'"}
+             "content": " Answer the question truthfully based on the given text below. Include verbatim quote and a comment where to find it in the text (paragraph). After the quote write a step by step explanation. Use bullet points. Question:" + question + "Given text: " +"'" +  context_ + "'"}
 
         ]
     )
 
     content_value = result['choices'][0]['message']['content']
     return(content_value)
+def scraper(link_):
+    url = link_
+    response = requests.get(url)
 
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+    text = soup.get_text()
+
+    clean_text = text.replace('\n', '').replace('\r', '').replace('\t', '')
+    return(clean_text)
 form = st.form(key="annotation")
 with form:
     question = st.text_area('Enter your question')
     submitted = st.form_submit_button(label="Submit Question")
 
 if submitted:
-    result = entity_extractor(question)
-    st.write(result)
+    if link_ != "":
+        text = scraper(link_)
+        entity_extractor(question, text)
+    else:
+        result = entity_extractor(question,pdf_text_result_)
+        st.write(result)
 

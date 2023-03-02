@@ -4,3 +4,4 @@ openai
 python-dotenv==1.0.0
 openpyxl
 xlsxwriter
+bs4
