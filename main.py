@@ -83,7 +83,7 @@ def entity_extractor():
     return(content_value)
 
 form = st.form(key="annotation")
-result = pd.DataFrame()
+
 with form:
 
     submitted = st.form_submit_button(label="Get entities as an excel file")
@@ -98,7 +98,7 @@ buffer = io.BytesIO()
 # Create a Pandas Excel writer using XlsxWriter as the engine.
 with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
     # Write each dataframe to a different worksheet.
-    result.to_excel(writer, sheet_name='Sheet1')
+    result_df.to_excel(writer, sheet_name='Sheet1')
     # Close the Pandas Excel writer and output the Excel file to the buffer
     writer.save()
     st.download_button(
