@@ -70,9 +70,9 @@ def entity_extractor():
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": "Find entities from the given article. Create a dataframe with two column which are the names are 'Entity name' and 'Entity value' and put the values accordingly."
-                        "I want to you check names, locations(it might be a place like a school name, or hospital name), ids, dates, companies, emails, phone numbers, and IBANs. Only chek these values. Don't check other values."
-                        "Don't check other entities. There might be more than one name, location etc. Find all of them. Giving article: " +"'" +  pdf_text_result_ + "'"}
+             "content": "Find requested entities from the given article. Requested entities are 'name,location(it might be a hospital, office name etc.),id,data,company,email,phone number, iban. Create a dataframe with two column which are the names are 'Entity name' and 'Entity value' and put the values accordingly."
+                        "Only check these values. Don't check other values or entities. There might be more than one name, location, id, phone number,company, email or iban. If you find more tha one, add new row with entity name and value."
+                        "Giving article: " +"'" +  pdf_text_result_ + "'"}
 
         ]
     )
