@@ -70,7 +70,7 @@ def entity_extractor(question):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": question +  " Answer the question truthfully based on the given text. Include quotes and a comment where to find it in the text (paragraph). After the quote write a step by step explanation. Use bullet points. Given text: " +"'" +  pdf_text_result_ + "'"}
+             "content": question +  " Answer the question truthfully based on the given text. Include quotes and a comment where to find it in the text (paragraph). After the quote write a step by step explanation. Use bullet points. Given text:" +  pdf_text_result_ }
 
         ]
     )
