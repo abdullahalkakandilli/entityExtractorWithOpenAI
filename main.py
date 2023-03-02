@@ -90,8 +90,7 @@ result_df = pd.DataFrame()
 if submitted:
 
     result = entity_extractor()
-    result_df = pd.read_csv(pd.compat.StringIO(result))
-
+    st.write(result)
 
 buffer = io.BytesIO()
 # Create a Pandas Excel writer using XlsxWriter as the engine.
