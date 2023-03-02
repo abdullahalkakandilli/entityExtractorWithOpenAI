@@ -70,8 +70,8 @@ def entity_extractor():
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": "Find requested entities from the given article. Requested entities are 'name,location(it might be a hospital, office name etc.),id,data,company,email,phone number, iban. Don't create or try to find entities other than requested entities. Create a dataframe with two column which are the names are 'Entity name' and 'Entity value' and put the values accordingly."
-                        "There might be more than one name, location, id, phone number,company, email or iban. If you find more tha one, add new row with entity name and value."
+             "content": "Find requested entities from the given article. Requested entities are 'name,location(it might be a hospital, office name etc.),id,company,email,phone number. Don't create or try to find entities other than requested entities. Create a dataframe with two column which are the names are 'Entity name' and 'Entity value' and put the values accordingly."
+                        "There might be more than one name, location, id, phone number,company, email or iban. If you find more than one, add new row with entity name and value."
                         "Given article: " +"'" +  pdf_text_result_ + "'"}
 
         ]
