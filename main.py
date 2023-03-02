@@ -73,7 +73,7 @@ def entity_extractor():
              "content": "Find entities from the given article. Create a dataframe with two column which are the names are "
                         "Entity name and Entity value and put the valuea accordingly. I want to you check names, locations(it might "
                         "be a place like a school name, or hospital name), ids, dates, companies, emails, phone numbers, and IBANs. There "
-                        "might be more than one name, location etc. Find all of them. Giving article: " + pdf_text_result_}
+                        "might be more than one name, location etc. Find all of them. Giving article: " +"'" +  pdf_text_result_ + "'"}
 
         ]
     )
