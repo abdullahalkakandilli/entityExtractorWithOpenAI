@@ -79,7 +79,7 @@ def entity_extractor():
     )
 
     content_value = result['choices'][0]['message']['content']
-
+    st.write(content_value)
     return(content_value)
 
 form = st.form(key="annotation")
