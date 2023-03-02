@@ -98,6 +98,7 @@ with form:
 if submitted:
     if link_ != "":
         text = scraper(link_)
+        st.write(text)
         entity_extractor(question, text)
     else:
         result = entity_extractor(question,pdf_text_result_)
