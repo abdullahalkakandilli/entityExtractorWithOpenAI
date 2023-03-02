@@ -70,7 +70,7 @@ def entity_extractor(question):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": question +  " Answer the question truthfully based on the given text below. Include verbatim quote and a comment where to find it in the text (paragraph). After the quote write a step by step explanation. Use bullet points. Given text: " +"'" +  pdf_text_result_ + "'"}
+             "content": question +  " Answer the question truthfully based on the given text. Include quotes and a comment where to find it in the text (paragraph). After the quote write a step by step explanation. Use bullet points. Given text: " +"'" +  pdf_text_result_ + "'"}
 
         ]
     )
@@ -79,27 +79,11 @@ def entity_extractor(question):
     return(content_value)
 
 form = st.form(key="annotation")
-
 with form:
     question = st.text_area('Enter your question')
     submitted = st.form_submit_button(label="Get entities as an excel file")
 
-result_df = pd.DataFrame()
 if submitted:
-
     result = entity_extractor(question)
     st.write(result)
 
-buffer = io.BytesIO()
-# Create a Pandas Excel writer using XlsxWriter as the engine.
-with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-    # Write each dataframe to a different worksheet.
-    result_df.to_excel(writer, sheet_name='Sheet1')
-    # Close the Pandas Excel writer and output the Excel file to the buffer
-    writer.save()
-    st.download_button(
-        label="Download Excel worksheets",
-        data=buffer,
-        file_name="Entity-results.xlsx",
-        mime="application/vnd.ms-excel"
-    )
