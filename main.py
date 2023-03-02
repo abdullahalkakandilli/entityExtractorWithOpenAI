@@ -68,12 +68,12 @@ if uploaded_file is not None:
 
 link_ = st.text_input("Or enter the link of the website")
 
-def entity_extractor(question, context_):
+def entity_extractor(question, pdftext, linktext):
     result = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": " Answer the question truthfully based on the given text below. Include verbatim quote and a comment where to find it in the text (paragraph). After the quote write a step by step explanation. Use bullet points. Question:" + question + "Given text: " +"'" +  context_ + "'"}
+             "content": " Answer the question truthfully based on the given text below. Include verbatim quote and a comment where to find it in the text (paragraph). After the quote write a step by step explanation. Use bullet points. Question:" + question + "Given text: " +"'" +  pdftext + "-" + linktext + "'"}
 
         ]
     )
@@ -96,12 +96,7 @@ with form:
     submitted = st.form_submit_button(label="Submit Question")
 
 if submitted:
-    if link_ != "":
-        text = scraper(link_)
-        st.write(text)
-        result_a = entity_extractor(question, text)
-        st.write(result_a)
-    else:
-        result_b = entity_extractor(question,pdf_text_result_)
-        st.write(result_b)
+    text = scraper(link_)
+    result_b = entity_extractor(question,pdf_text_result_, text)
+    st.write(result_b)
 
