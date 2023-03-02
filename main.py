@@ -92,9 +92,11 @@ def scraper(link_):
         text = soup.get_text()
 
         clean_text = text.replace('\n', '').replace('\r', '').replace('\t', '')
-        return(clean_text)
+
     except:
+        clean_text = ""
         st.write("Link is not correct!")
+    return (clean_text)
 form = st.form(key="annotation")
 with form:
     question = st.text_area('Enter your question')
