@@ -66,7 +66,6 @@ if uploaded_file is not None:
     pdf_text_result_ = output_string.getvalue()
 
 def entity_extractor(question):
-    st.write(pdf_text_result_)
     result = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
