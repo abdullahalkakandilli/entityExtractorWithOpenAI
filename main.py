@@ -81,7 +81,7 @@ def entity_extractor(question):
 form = st.form(key="annotation")
 with form:
     question = st.text_area('Enter your question')
-    submitted = st.form_submit_button(label="Get entities as an excel file")
+    submitted = st.form_submit_button(label="Submit Question")
 
 if submitted:
     result = entity_extractor(question)
