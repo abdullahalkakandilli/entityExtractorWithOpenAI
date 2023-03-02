@@ -86,6 +86,7 @@ with form:
 
     submitted = st.form_submit_button(label="Get entities as an excel file")
 
+result_df = pd.DataFrame()
 if submitted:
 
     result = entity_extractor()
