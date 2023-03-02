@@ -1,11 +1,7 @@
 import io
 import pandas as pd
 import streamlit as st
-import requests
-import pdfminer
 import os
-
-from functionforDownloadButtons import download_button
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfdocument import PDFDocument
@@ -15,6 +11,7 @@ from pdfminer.pdfparser import PDFParser
 import openai
 from dotenv import load_dotenv
 load_dotenv()
+
 openai.api_key = os.getenv('OPEN_API_KEY')
 
 def _max_width_():
@@ -55,7 +52,7 @@ uploaded_file = st.file_uploader(
 )
 result_ = ""
 if uploaded_file is not None:
-    output_string = StringIO()
+    output_string = io.StringIO()
 
     parser = PDFParser(uploaded_file)
     doc = PDFDocument(parser)
@@ -106,6 +103,6 @@ with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
     st.download_button(
         label="Download Excel worksheets",
         data=buffer,
-        file_name="ClassifiedExcelResult.xlsx",
+        file_name="Entity-results.xlsx",
         mime="application/vnd.ms-excel"
     )
