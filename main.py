@@ -83,15 +83,18 @@ def entity_extractor(question, pdftext, linktext):
     content_value = result['choices'][0]['message']['content']
     return(content_value)
 def scraper(link_):
-    url = link_
-    response = requests.get(url)
+    try:
+        url = link_
+        response = requests.get(url)
 
-    soup = BeautifulSoup(response.content, 'html.parser')
+        soup = BeautifulSoup(response.content, 'html.parser')
 
-    text = soup.get_text()
+        text = soup.get_text()
 
-    clean_text = text.replace('\n', '').replace('\r', '').replace('\t', '')
-    return(clean_text)
+        clean_text = text.replace('\n', '').replace('\r', '').replace('\t', '')
+        return(clean_text)
+    except:
+        st.write("Link is not correct!")
 form = st.form(key="annotation")
 with form:
     question = st.text_area('Enter your question')
