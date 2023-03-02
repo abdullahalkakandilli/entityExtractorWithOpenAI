@@ -91,7 +91,8 @@ with form:
 result_df = pd.DataFrame()
 if submitted:
 
-    result = entity_extractor()
+    result_df = entity_extractor()
+
 
 buffer = io.BytesIO()
 # Create a Pandas Excel writer using XlsxWriter as the engine.
