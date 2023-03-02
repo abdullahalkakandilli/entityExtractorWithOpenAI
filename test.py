@@ -11,3 +11,9 @@ result = openai.ChatCompletion.create(
 )
 
 content_value = result['choices'][0]['message']['content']
+print(type(content_value))
+print(content_value)
+df = pd.DataFrame()
+df = content_value
+print(type(content_value))
+print(df)
