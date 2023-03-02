@@ -83,7 +83,7 @@ def entity_extractor():
     return(content_value)
 
 form = st.form(key="annotation")
-result = ""
+result = pd.DataFrame()
 with form:
 
     submitted = st.form_submit_button(label="Get entities as an excel file")
