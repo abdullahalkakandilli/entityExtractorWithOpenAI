@@ -28,7 +28,7 @@ def _max_width_():
         unsafe_allow_html=True,
     )
 
-st.set_page_config(page_icon="images/icon.png", page_title="Entity Extractor")
+st.set_page_config(page_icon="images/icon.png", page_title="Ask Question to PDF")
 
 
 c2, c3 = st.columns([6, 1])
@@ -37,7 +37,7 @@ with c2:
     c31, c32 = st.columns([12, 2])
     with c31:
         st.caption("")
-        st.title("Entity Extractor")
+        st.title("Ask Question to PDF")
     with c32:
         st.image(
             "images/logo.png",
@@ -65,12 +65,12 @@ if uploaded_file is not None:
     # st.write(merged_text)
     pdf_text_result_ = output_string.getvalue()
 
-def entity_extractor():
+def entity_extractor(question):
     result = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": "What are the names? Answer the question truthfully based on the given text below. Include verbatim quote and a comment where to find it in the text (page number). After the quote write a step by step explanation. Use bullet points.  " +"'" +  pdf_text_result_ + "'"}
+             "content": question +  " Answer the question truthfully based on the given text below. Include verbatim quote and a comment where to find it in the text (paragraph). After the quote write a step by step explanation. Use bullet points.  " +"'" +  pdf_text_result_ + "'"}
 
         ]
     )
@@ -81,13 +81,13 @@ def entity_extractor():
 form = st.form(key="annotation")
 
 with form:
-
+    question = st.text_area('Enter your question')
     submitted = st.form_submit_button(label="Get entities as an excel file")
 
 result_df = pd.DataFrame()
 if submitted:
 
-    result = entity_extractor()
+    result = entity_extractor(question)
     st.write(result)
 
 buffer = io.BytesIO()
